@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="data:," />
+<title>0xcavin — Project Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0f0e0c; --bg2:#161412; --card:#1a1815; --card2:#201d19;
+    --line:#2c2822; --text:#f5f0e8; --muted:#a8a094; --muted2:#7d766a;
+    --ember:#ff5c1a; --ember2:#ff8a3d; --green:#3dd68c; --yellow:#f5c542;
+    --radius:16px;
+  }
+  @media (prefers-color-scheme: light){
+    :root{ --bg:#f6f2eb; --bg2:#efe9dd; --card:#ffffff; --card2:#faf7f1; --line:#e2d9c8; --text:#171410; --muted:#6b6255; --muted2:#8a8172; }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:"Archivo",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  button,[role="button"]{min-height:44px}
+  .mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px 64px}
+
+  /* top bar */
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 0 14px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .domain{font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:.02em;color:var(--muted)}
+  .domain b{color:var(--text);font-weight:700}
+  .domain span{color:var(--ember)}
+  .livepill{display:inline-flex;align-items:center;gap:8px;font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);background:var(--card);padding:8px 12px;border-radius:999px}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px color-mix(in srgb, var(--green) 18%, transparent)}
+
+  /* hero */
+  .hero{padding:44px 0 8px;display:grid;grid-template-columns:1.35fr .65fr;gap:28px}
+  @media(max-width:760px){.hero{grid-template-columns:1fr;padding-top:30px}}
+  .handle{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--ember);font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin:0 0 14px}
+  h1{font-size:clamp(42px,7vw,76px);line-height:.92;letter-spacing:-.04em;margin:0;font-weight:900}
+  h1 em{font-style:normal;color:var(--ember)}
+  .lede{font-size:18px;line-height:1.6;color:var(--muted);max-width:56ch;margin:18px 0 0}
+  .lede strong{color:var(--text)}
+  .motto{margin-top:22px;padding:16px 18px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius)}
+  .motto p{margin:0;font-family:"JetBrains Mono",monospace;font-size:13.5px;line-height:1.7}
+  .motto p b{color:var(--ember2)}
+  .hero-side{display:flex;flex-direction:column;gap:12px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+  .stat label{display:block;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted2);margin-bottom:6px}
+  .stat strong{display:block;font-size:28px;line-height:1;letter-spacing:-.03em}
+  .stat small{color:var(--muted);font-size:13px}
+  .stat.ember{background:var(--ember);border-color:var(--ember);color:#fff}
+  .stat.ember label,.stat.ember small{color:rgba(255,255,255,.82)}
+
+  /* links */
+  .links{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
+  @media(max-width:700px){.links{grid-template-columns:1fr}}
+  .linkcard{display:flex;align-items:center;gap:14px;text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 16px;min-height:72px;transition:border-color .15s, transform .15s}
+  .linkcard:hover{border-color:var(--ember);transform:translateY(-1px)}
+  .linkcard .ic{width:42px;height:42px;flex:0 0 42px;border-radius:10px;background:var(--bg2);border:1px solid var(--line);display:grid;place-items:center;font-size:20px}
+  .linkcard b{display:block;font-size:15px;line-height:1.2}
+  .linkcard span{display:block;font-size:13px;color:var(--muted);font-family:"JetBrains Mono",monospace;margin-top:2px;word-break:break-all}
+  .linkcard .arr{margin-left:auto;color:var(--muted2);font-size:18px}
+
+  /* sections */
+  section{margin-top:48px}
+  .sec-head{display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+  h2{font-size:28px;line-height:1;letter-spacing:-.03em;margin:0}
+  .sec-head p{margin:6px 0 0;color:var(--muted);font-size:14.5px;max-width:52ch}
+  .filters{display:flex;gap:8px;flex-wrap:wrap}
+  .filters button{font-family:"JetBrains Mono",monospace;font-size:12.5px;font-weight:700;letter-spacing:.04em;border:1px solid var(--line);background:var(--card);color:var(--muted);padding:9px 14px;border-radius:999px;cursor:pointer;min-height:40px}
+  .filters button.active{background:var(--text);color:var(--bg);border-color:var(--text)}
+
+  .projects{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:760px){.projects{grid-template-columns:1fr}}
+  .proj{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:12px}
+  .proj.hidden{display:none}
+  .proj-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+  .proj h3{margin:0;font-size:20px;letter-spacing:-.02em;line-height:1.15}
+  .badge{flex:0 0 auto;font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:6px 9px;border-radius:999px;border:1px solid var(--line)}
+  .badge.live{color:var(--green);border-color:color-mix(in srgb, var(--green) 40%, var(--line))}
+  .badge.building{color:var(--yellow);border-color:color-mix(in srgb, var(--yellow) 40%, var(--line))}
+  .badge.planned{color:var(--muted)}
+  .proj p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.6}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:4px}
+  .tags span{font-family:"JetBrains Mono",monospace;font-size:11.5px;background:var(--bg2);border:1px solid var(--line);padding:5px 8px;border-radius:999px;color:var(--muted)}
+  .walletbox{margin-top:2px;background:var(--bg);border:1px dashed var(--line);border-radius:12px;padding:12px}
+  .walletbox label{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted2);display:block;margin-bottom:6px}
+  .walletrow{display:flex;gap:8px;align-items:center}
+  .walletrow code{font-family:"JetBrains Mono",monospace;font-size:12.5px;word-break:break-all;line-height:1.5;flex:1}
+  .copybtn{flex:0 0 auto;border:1px solid var(--line);background:var(--card2);color:var(--text);font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700;padding:8px 12px;border-radius:9px;cursor:pointer;min-height:38px}
+  .copybtn:active{transform:scale(.97)}
+
+  /* terminal / readme */
+  .terminal{background:#12100e;color:#ece7dd;border:1px solid #2a2620;border-radius:16px;overflow:hidden}
+  .term-bar{display:flex;align-items:center;gap:7px;padding:12px 14px;border-bottom:1px solid #2a2620;background:#1a1713}
+  .term-bar i{width:11px;height:11px;border-radius:50%;display:block}
+  .term-bar span{margin-left:8px;font-family:"JetBrains Mono",monospace;font-size:12px;color:#9a9184}
+  .terminal pre{margin:0;padding:18px;overflow-x:auto;font-family:"JetBrains Mono",monospace;font-size:13px;line-height:1.75;white-space:pre-wrap;word-break:break-word}
+  .terminal .c{color:#8b8378}.terminal .k{color:#ff8a3d}.terminal .g{color:#3dd68c}.terminal .w{color:#f5f0e8}
+
+  .principles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:700px){.principles{grid-template-columns:1fr}}
+  .principle{background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .principle b{display:block;font-size:16px;margin-bottom:6px}
+  .principle p{margin:0;color:var(--muted);font-size:14px;line-height:1.6}
+  .principle .num{font-family:"JetBrains Mono",monospace;color:var(--ember);font-size:12px;font-weight:700;letter-spacing:.08em}
+
+  /* DYOR / chainlist */
+  .dyor-note{background:color-mix(in srgb, var(--ember) 10%, var(--card));border:1px solid color-mix(in srgb, var(--ember) 45%, var(--line));border-radius:14px;padding:16px 18px;margin-bottom:14px}
+  .dyor-note p{margin:0;font-size:14.5px;line-height:1.65}
+  .dyor-note p b{color:var(--ember2)}
+  .chain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:760px){.chain-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:480px){.chain-grid{grid-template-columns:1fr}}
+  .chain-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+  .chain-card .cname{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+  .chain-card .cname b{font-size:15px;letter-spacing:-.01em}
+  .chain-tag{font-family:"JetBrains Mono",monospace;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 7px;border-radius:999px;border:1px solid var(--line);color:var(--muted);flex:0 0 auto}
+  .chain-tag.mainnet{color:var(--ember2);border-color:color-mix(in srgb, var(--ember) 50%, var(--line))}
+  .chain-tag.testnet{color:var(--green);border-color:color-mix(in srgb, var(--green) 40%, var(--line))}
+  .chain-id{font-family:"JetBrains Mono",monospace;font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1}
+  .chain-id small{display:block;font-size:11px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--muted2);margin-bottom:4px}
+  .chain-card p{margin:8px 0 0;color:var(--muted);font-size:13px;line-height:1.5}
+  .chainlist-link{display:inline-flex;align-items:center;gap:8px;margin-top:14px;text-decoration:none;background:var(--text);color:var(--bg);font-family:"JetBrains Mono",monospace;font-size:13px;font-weight:700;padding:11px 16px;border-radius:999px;min-height:44px}
+  .chainlist-link:hover{opacity:.88}
+
+  .focus{display:flex;flex-wrap:wrap;gap:8px}
+  .focus span{font-size:14px;font-weight:600;border:1px solid var(--line);background:var(--card);padding:10px 14px;border-radius:999px}
+
+  /* dashboard */
+  .dash-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
+  @media(max-width:760px){.dash-summary{grid-template-columns:1fr 1fr}}
+  .dash-stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+  .dash-stat label{display:block;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted2);margin-bottom:4px}
+  .dash-stat strong{font-size:22px;letter-spacing:-.02em;line-height:1}
+  .dash-stat small{display:block;color:var(--muted);font-size:12.5px;margin-top:4px}
+  .dash-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:760px){.dash-grid{grid-template-columns:1fr}}
+  .dash-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:10px}
+  .dash-card.hidden{display:none}
+  .dash-card.needs{border-color:color-mix(in srgb, var(--ember) 55%, var(--line))}
+  .dash-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+  .dash-cat{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ember)}
+  .dash-card h3{margin:2px 0 0;font-size:18px;letter-spacing:-.02em;line-height:1.2}
+  .dash-card p{margin:0;color:var(--muted);font-size:14px;line-height:1.6}
+  .badge.needs-you{color:var(--ember2);border-color:color-mix(in srgb, var(--ember) 50%, var(--line))}
+  .badge.in-progress{color:var(--green);border-color:color-mix(in srgb, var(--green) 40%, var(--line))}
+  .badge.watching{color:var(--yellow);border-color:color-mix(in srgb, var(--yellow) 40%, var(--line))}
+  .dash-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px;border-top:1px dashed var(--line)}
+  .dash-meta span{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--muted);padding-top:8px}
+  .dash-meta span b{color:var(--text);font-weight:700}
+  .dash-filters{display:flex;gap:8px;flex-wrap:wrap}
+  .dash-filters button{font-family:"JetBrains Mono",monospace;font-size:12.5px;font-weight:700;letter-spacing:.04em;border:1px solid var(--line);background:var(--card);color:var(--muted);padding:9px 14px;border-radius:999px;cursor:pointer;min-height:40px}
+  .dash-filters button.active{background:var(--text);color:var(--bg);border-color:var(--text)}
+  .dash-empty{display:none;background:var(--card2);border:1px dashed var(--line);border-radius:14px;padding:18px;color:var(--muted);font-size:14px;text-align:center}
+  .dash-empty.show{display:block}
+
+  /* featured burner */
+  .burner-feature{margin-top:36px;background:var(--card);border:2px solid var(--ember);border-radius:22px;padding:28px;position:relative;overflow:hidden}
+  @media(max-width:600px){.burner-feature{padding:20px}}
+  .burner-feature::before{content:"";position:absolute;inset:0 0 auto 0;height:6px;background:var(--ember)}
+  .burner-kicker{font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ember);margin:0 0 8px}
+  .burner-feature h2{font-size:clamp(30px,5vw,44px);line-height:.95;letter-spacing:-.035em;margin:0}
+  .burner-feature h2 em{font-style:normal;color:var(--ember)}
+  .burner-lede{color:var(--muted);font-size:16px;line-height:1.65;max-width:68ch;margin:12px 0 0}
+  .burner-lede strong{color:var(--text)}
+  .burner-warn{margin-top:18px;background:color-mix(in srgb, var(--ember) 12%, var(--card2));border:1px solid color-mix(in srgb, var(--ember) 55%, var(--line));border-radius:12px;padding:14px 16px}
+  .burner-warn p{margin:0;font-size:14.5px;line-height:1.6}
+  .burner-warn b{color:var(--ember2)}
+  .addr-list{display:flex;flex-direction:column;gap:10px;margin-top:20px}
+  .addr-row{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+  .addr-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+  .addr-head b{font-size:15px}
+  .addr-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .explorer-link{font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700;text-decoration:none;border:1px solid var(--line);background:var(--card2);padding:8px 12px;border-radius:9px;min-height:38px;display:inline-flex;align-items:center}
+  .explorer-link:hover{border-color:var(--ember);color:var(--ember2)}
+  .addr-row code{font-family:"JetBrains Mono",monospace;font-size:13px;word-break:break-all;line-height:1.6;display:block}
+  .faucet-line{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+  .faucet-line span{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted2);margin-right:2px}
+  .faucet-line a{font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700;text-decoration:none;border:1px solid var(--line);background:var(--card);color:var(--text);padding:6px 10px;border-radius:999px}
+  .faucet-line a:hover{border-color:var(--ember);color:var(--ember2)}
+  .faucet-line em{font-style:normal;font-size:12.5px;color:var(--muted)}
+  .burner-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
+  @media(max-width:600px){.burner-stats{grid-template-columns:1fr}}
+  .burner-stats div{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+  .burner-stats b{display:block;font-size:18px;letter-spacing:-.02em}
+  .burner-stats span{font-size:12.5px;color:var(--muted)}
+
+  footer{margin-top:56px;border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:13px}
+  footer .mono{font-size:12.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div class="domain"><b>0xcavin</b><span>.github.io</span> &nbsp;—&nbsp; project home</div>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <a href="#burner" style="font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;text-decoration:none;border:1px solid var(--ember);color:var(--ember2);padding:9px 14px;border-radius:999px;min-height:40px;display:inline-flex;align-items:center">★ Burner wallet</a>
+      <div class="livepill"><span class="dot"></span> Testnet live</div>
+    </div>
+  </div>
+
+  <section id="burner" class="burner-feature" aria-label="Featured project — Multi-chain Burner Wallet">
+    <p class="burner-kicker">★ Featured project — hero project · Focus: burner first</p>
+    <h2>Multi-chain Burner Wallet<br><em>One wallet. Every chain.</em></h2>
+    <p class="burner-lede">The special one. One mnemonic, many chains — <strong>BTC SegWit, BTC Testnet4, EVM, Solana, and TRON</strong>, mainnet–testnet, run inside the VM. Built for testnet-first experiments, faucet claims, and safe automation before anything touches mainnet for real. Checked 22 Nov: all burner balances still 0 — remaining faucets need manual captcha / wallet-connect steps.</p>
+
+    <div class="burner-warn" role="note">
+      <p><b>⚠ Testnet-first — never share seed / keys:</b> These are <b>public addresses only</b> — safe to share. Never share the seed phrase or private keys with anyone, on any site, ever. Use this burner only — never a wallet that holds anything — for unverified claims. Testnet first, mainnet only with a specific go-ahead.</p>
+    </div>
+
+    <div class="burner-stats">
+      <div><b>5 addresses</b><span>BTC · BTC Testnet4 · EVM · Solana · TRON</span></div>
+      <div><b>Mainnet + testnet</b><span>All multichains, one mnemonic (BIP39)</span></div>
+      <div><b>0 everywhere</b><span>Balances checked 22 Nov 2026 — claims pending your clicks</span></div>
+    </div>
+
+    <div class="addr-list">
+      <div class="addr-row">
+        <div class="addr-head"><b>Bitcoin — SegWit (Mainnet)</b><span class="addr-actions"><button class="copybtn" type="button" data-copy="bc1qnw40xgm2pmqlw23zfehzfamazxx9h0k8qdf835">Copy</button><a class="explorer-link" href="https://blockchair.com/bitcoin/address/bc1qnw40xgm2pmqlw23zfehzfamazxx9h0k8qdf835" target="_blank" rel="noopener">Explorer ↗</a></span></div>
+        <code>bc1qnw40xgm2pmqlw23zfehzfamazxx9h0k8qdf835</code>
+        <div class="faucet-line"><span>Faucets</span><em>Mainnet — no faucet. Never buy “free BTC” claims.</em></div>
+      </div>
+
+      <div class="addr-row">
+        <div class="addr-head"><b>Bitcoin — Testnet4</b><span class="addr-actions"><button class="copybtn" type="button" data-copy="tb1q8ltwhn7an0q9t2nscu909np84yhp66uscj0vk2">Copy</button><a class="explorer-link" href="https://mempool.space/testnet4/address/tb1q8ltwhn7an0q9t2nscu909np84yhp66uscj0vk2" target="_blank" rel="noopener">Explorer ↗</a></span></div>
+        <code>tb1q8ltwhn7an0q9t2nscu909np84yhp66uscj0vk2</code>
+        <div class="faucet-line"><span>Faucets</span><em>No verified captcha-free Testnet4 faucet yet — manual claim only, verify it pays Testnet4 first.</em></div>
+      </div>
+
+      <div class="addr-row">
+        <div class="addr-head"><b>EVM — All EVM chains</b><span class="addr-actions"><button class="copybtn" type="button" data-copy="0x6a18969EB94600138bbc70E1E3f1F38BCDa28aD8">Copy</button><a class="explorer-link" href="https://sepolia.etherscan.io/address/0x6a18969EB94600138bbc70E1E3f1F38BCDa28aD8" target="_blank" rel="noopener">Sepolia Explorer ↗</a></span></div>
+        <code>0x6a18969EB94600138bbc70E1E3f1F38BCDa28aD8</code>
+        <div class="faucet-line"><span>Faucets</span>
+          <a href="https://faucet.circle.com" target="_blank" rel="noopener">Circle ↗</a>
+          <a href="https://faucets.chain.link" target="_blank" rel="noopener">Chainlink ↗</a>
+          <a href="https://cloud.google.com/application/web3/faucet" target="_blank" rel="noopener">Google Cloud ↗</a>
+          <a href="https://sepolia-faucet.pk910.de" target="_blank" rel="noopener">pk910 PoW ↗</a>
+          <a href="https://portal.cdp.coinbase.com/products/faucet" target="_blank" rel="noopener">Base CDP ↗</a>
+          <a href="https://faucet.polygon.technology" target="_blank" rel="noopener">Polygon ↗</a>
+        </div>
+      </div>
+
+      <div class="addr-row">
+        <div class="addr-head"><b>Solana — Devnet / Mainnet</b><span class="addr-actions"><button class="copybtn" type="button" data-copy="CYjU7mQMZc3MnbziyfRLdvrhxpHQSvfQA6rMQu86SmRn">Copy</button><a class="explorer-link" href="https://explorer.solana.com/address/CYjU7mQMZc3MnbziyfRLdvrhxpHQSvfQA6rMQu86SmRn?cluster=devnet" target="_blank" rel="noopener">Explorer (devnet) ↗</a></span></div>
+        <code>CYjU7mQMZc3MnbziyfRLdvrhxpHQSvfQA6rMQu86SmRn</code>
+        <div class="faucet-line"><span>Faucets</span><a href="https://faucet.solana.com" target="_blank" rel="noopener">Solana Faucet ↗</a></div>
+      </div>
+
+      <div class="addr-row">
+        <div class="addr-head"><b>TRON — Nile / Mainnet</b><span class="addr-actions"><button class="copybtn" type="button" data-copy="THZZagYxo7vaS4z1NUVoDTBRyEDAoMzntJ">Copy</button><a class="explorer-link" href="https://tronscan.org/#/address/THZZagYxo7vaS4z1NUVoDTBRyEDAoMzntJ" target="_blank" rel="noopener">Tronscan ↗</a></span></div>
+        <code>THZZagYxo7vaS4z1NUVoDTBRyEDAoMzntJ</code>
+        <div class="faucet-line"><span>Faucets</span><em>TRON Nile — manual reCAPTCHA claim only, verify it pays Nile before pasting.</em></div>
+      </div>
+    </div>
+
+    <div class="tags" style="margin-top:16px"><span>BTC SegWit</span><span>BTC Testnet4</span><span>EVM</span><span>Solana</span><span>TRON</span><span>BIP39</span><span>Testnet-first</span></div>
+  </section>
+
+  <header class="hero">
+    <div>
+      <p class="handle">0xcavin · Cavin · Developer &amp; Creator</p>
+      <h1>Building<br>on-chain,<br><em>testnet-first.</em></h1>
+      <p class="lede">I'm <strong>Cavin</strong> — crypto enthusiast, developer, and creator working on <strong>airdrops, testnets, bug fixes, and bounties</strong>. This is the home for everything I'm building: the multi-chain burner wallet first, then Circle Agent Wallets on ARC, and on-chain automation.</p>
+      <div class="motto"><p><b>DYOR</b> — don't trust, verify.<br>Not your keys, not your coins.</p></div>
+    </div>
+    <div class="hero-side">
+      <div class="stat ember"><label>Burner Wallet · Featured</label><strong>5 addresses</strong><small>BTC · EVM · Solana · TRON — mainnet + testnet, featured at the top of this page</small></div>
+      <div class="stat"><label>Circle · Test USDC</label><strong>100 USDC</strong><small>Via Circle Agent Wallets — ARC only</small></div>
+      <div class="stat"><label>Arc Testnet — Verified</label><strong>20 USDC</strong><small>First faucet claim landed via CLI fund</small></div>
+    </div>
+  </header>
+
+  <nav class="links" aria-label="Profiles">
+    <a class="linkcard" href="https://github.com/0xcavin" target="_blank" rel="noopener">
+      <span class="ic" aria-hidden="true">⌥</span>
+      <span><b>GitHub</b><span>github.com/0xcavin</span></span><span class="arr">↗</span>
+    </a>
+    <a class="linkcard" href="https://x.com/0xcavin_" target="_blank" rel="noopener">
+      <span class="ic" aria-hidden="true">𝕏</span>
+      <span><b>X</b><span>x.com/0xcavin_</span></span><span class="arr">↗</span>
+    </a>
+    <a class="linkcard" href="https://t.me/airdropfind" target="_blank" rel="noopener">
+      <span class="ic" aria-hidden="true">✈</span>
+      <span><b>Telegram — @airdropfind</b><span>t.me/airdropfind</span></span><span class="arr">↗</span>
+    </a>
+  </nav>
+
+
+  <section id="projects">
+    <div class="sec-head">
+      <div><h2>More projects</h2><p>The burner wallet is featured above. Everything else I'm building — in the open, verified step by step.</p></div>
+      <div class="filters" role="group" aria-label="Filter projects">
+        <button class="active" data-filter="all">All</button>
+        <button data-filter="live">Live</button>
+        <button data-filter="building">Building</button>
+        <button data-filter="planned">Planned</button>
+      </div>
+    </div>
+
+    <div class="projects">
+      <article class="proj" data-status="live">
+        <div class="proj-top"><h3>Circle Agent Wallets</h3><span class="badge live">● Live</span></div>
+        <p>Kept focused on ARC only. CLI 1.4.0 installed, Terms v1 accepted, testnet login done — session valid 28 days. Agent wallet live on Arc Testnet first, then ETH Sepolia, funded from the Circle faucet.</p>
+        <div class="walletbox">
+          <label>Agent wallet — public address</label>
+          <div class="walletrow">
+            <code id="walletAddr">0x59ad23bc3bee93ce5c95354f9d5a449161209c7f</code>
+            <button class="copybtn" id="copyBtn" type="button">Copy</button>
+          </div>
+        </div>
+        <div class="tags"><span>Circle CLI 1.4.0</span><span>Arc Testnet</span><span>ETH Sepolia</span><span>USDC</span></div>
+      </article>
+
+      <article class="proj" data-status="planned">
+        <div class="proj-top"><h3>On-chain Sniper Tools</h3><span class="badge planned">Planned</span></div>
+        <p>Tooling for ERC-20 launches, NFT minting, and task automation across mainnet and testnet. Comes after the burner wallet is created and tested — automation runs on a schedule so claims land on time.</p>
+        <div class="tags"><span>ERC-20</span><span>NFT minting</span><span>Automation</span><span>Scheduled claims</span></div>
+      </article>
+
+      <article class="proj" data-status="live">
+        <div class="proj-top"><h3>@airdropfind</h3><span class="badge live">● Live</span></div>
+        <p>Telegram channel for airdrops and testnets. Verify-first only: no team, no docs, no token details and no stated prizes = pure speculation. Never connect a wallet that holds anything to an unverified claim.</p>
+        <div class="tags"><span>Telegram</span><span>Airdrops</span><span>Testnets</span><span>Verify-first</span></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="dashboard">
+    <div class="sec-head">
+      <div><h2>Dashboard</h2><p>Everything tracked in one place — same board as my Muse Dash. Testnet only, $0 real money.</p></div>
+      <div class="dash-filters" role="group" aria-label="Filter dashboard">
+        <button class="active" data-dfilter="all">All</button>
+        <button data-dfilter="needs-you">Needs you</button>
+        <button data-dfilter="in-progress">In progress</button>
+        <button data-dfilter="watching">Watching</button>
+      </div>
+    </div>
+
+    <div class="dash-summary" aria-label="Dashboard summary">
+      <div class="dash-stat"><label>Tracked items</label><strong>6</strong><small>Money · Calendar · Drive · Inbox</small></div>
+      <div class="dash-stat"><label>Needs you</label><strong>1</strong><small>Money goal — your call</small></div>
+      <div class="dash-stat"><label>Test USDC</label><strong>100</strong><small>Circle Agent Wallets · testnet</small></div>
+      <div class="dash-stat"><label>Real money</label><strong>$0</strong><small>Testnet only — no real funds</small></div>
+    </div>
+
+    <div class="dash-grid" id="dashGrid">
+      <article class="dash-card needs" data-dstatus="needs-you">
+        <div class="dash-top"><div><span class="dash-cat">Money · Goal</span><h3>Grow Bitcoin wallet portfolios — mainnet–testnet</h3></div><span class="badge needs-you">● Needs you</span></div>
+        <p>Money goal tracked by spending. Burner balances checked 22 Nov: BTC mainnet 0 BTC verified, Arc Testnet 0 USDC, Sepolia 0 ETH — BTC Testnet4 and Solana devnet not verified this time. No faucet claim has landed for the burner yet.</p>
+        <div class="dash-meta"><span>Status <b>Needs you</b></span><span>·</span><span>Created <b>22 Nov 2026</b></span><span>·</span><span>Real money <b>$0</b></span></div>
+      </article>
+
+      <article class="dash-card" data-dstatus="in-progress">
+        <div class="dash-top"><div><span class="dash-cat">Money · Build</span><h3>Sniper tools / Circle Agent Wallets</h3></div><span class="badge in-progress">● Live</span></div>
+        <p>Circle Agent Wallets live on testnet — 100 test USDC via Circle, 20 USDC verified on Arc Testnet. Sniper tooling for ERC-20 launches, NFT minting, and automation builds on top of this wallet.</p>
+        <div class="dash-meta"><span>Status <b>In progress · Live</b></span><span>·</span><span>Updated <b>22 Nov 2026</b></span><span>·</span><span>Balance <b>100 test USDC</b></span></div>
+      </article>
+
+      <article class="dash-card" data-dstatus="watching">
+        <div class="dash-top"><div><span class="dash-cat">Inbox · Telegram</span><h3>@airdropfind — verified updates</h3></div><span class="badge watching">● Watching</span></div>
+        <p>Telegram channel @airdropfind monitored verify-first: airdrops and testnets checked for team, docs, token details, and stated prizes before anything is shared. Unverified = pure speculation.</p>
+        <div class="dash-meta"><span>Status <b>Watching</b></span><span>·</span><span>Checked <b>22 Nov 2026</b></span><span>·</span><span>Channel <b>t.me/airdropfind</b></span></div>
+      </article>
+
+      <article class="dash-card" data-dstatus="watching">
+        <div class="dash-top"><div><span class="dash-cat">Calendar · Schedule</span><h3>Get ready before each event</h3></div><span class="badge watching">● Watching</span></div>
+        <p>Daily morning prep job — next run Mon 23 Nov, ~07:47 GMT+7. No events found for 22–29 Nov, so nothing to prep yet. It fires before each event once the calendar fills up.</p>
+        <div class="dash-meta"><span>Status <b>Watching</b></span><span>·</span><span>Window <b>22–29 Nov 2026</b></span><span>·</span><span>Events <b>0</b></span></div>
+      </article>
+
+      <article class="dash-card" data-dstatus="watching">
+        <div class="dash-top"><div><span class="dash-cat">Drive · Storage</span><h3>Storage alert — nearly full check</h3></div><span class="badge watching">● Watching</span></div>
+        <p>Weekly Monday check — messages only if storage passes 90% full. Currently 1.37 MB of 15 GB used, so well clear. Backup files (public addresses + burner backup) sit in the Drive muse.ai folder.</p>
+        <div class="dash-meta"><span>Status <b>Watching</b></span><span>·</span><span>Checked <b>22 Nov 2026</b></span><span>·</span><span>Used <b>1.37 MB / 15 GB</b></span></div>
+      </article>
+
+      <article class="dash-card" data-dstatus="in-progress">
+        <div class="dash-top"><div><span class="dash-cat">Inbox · Gmail</span><h3>Gmail quick look</h3></div><span class="badge in-progress">● Working</span></div>
+        <p>Quick look done 22 Nov: unread inbox empty, 201 messages in the last 30 days to review — no bills, deliveries, appointments, travel, or renewals found. Daily Gmail briefing is set, next run Mon 23 Nov ~08:29 GMT+7.</p>
+        <div class="dash-meta"><span>Status <b>In progress · Working</b></span><span>·</span><span>Date <b>22 Nov 2026</b></span><span>·</span><span>Unread <b>0</b></span></div>
+      </article>
+    </div>
+    <p class="dash-empty" id="dashEmpty">Nothing in this filter right now.</p>
+  </section>
+
+  <section>
+    <div class="sec-head"><div><h2>Profile README</h2><p>The same bio that belongs on github.com/0xcavin — short, public, no secrets. Ever.</p></div></div>
+    <div class="terminal" aria-label="GitHub profile README preview">
+      <div class="term-bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span>0xcavin / README.md</span></div>
+      <pre><span class="c"># Hi, I'm Cavin — 0xcavin</span>
+
+<span class="w">Crypto enthusiast · Developer · Creator</span>
+<span class="k">Focus:</span>  airdrops, testnets, bug fixes, bounties
+<span class="k">Building:</span> Circle Agent Wallets, multi-chain burner wallet,
+          on-chain sniper &amp; automation tools
+<span class="k">Motto:</span>  <span class="g">DYOR — don't trust, verify.</span>
+          <span class="g">Not your keys, not your coins.</span>
+
+<span class="c">## Links</span>
+GitHub   <span class="w">github.com/0xcavin</span>
+X        <span class="w">x.com/0xcavin_</span>
+Telegram <span class="w">t.me/airdropfind</span>
+Home     <span class="w">0xcavin.github.io</span>
+
+<span class="c"># No seed phrases. No private keys. Public addresses only.</span></pre>
+    </div>
+  </section>
+
+  <section id="dyor">
+    <div class="sec-head">
+      <div><h2>DYOR — Chain Reference</h2><p>Chainlist.org is the verified EVM chain reference. Check the chain ID and RPC there before adding any network to a wallet.</p></div>
+    </div>
+
+    <div class="dyor-note">
+      <p><b>Verify first, always:</b> always verify the chain ID and RPC before connecting a wallet. Testnet-first. Never connect a wallet holding anything to an unverified project.</p>
+    </div>
+
+    <div class="chain-grid">
+      <div class="chain-card">
+        <div class="cname"><b>Arc</b><span class="chain-tag mainnet">Mainnet</span></div>
+        <div class="chain-id"><small>Chain ID</small>5042</div>
+        <p>Native currency: USDC.</p>
+      </div>
+      <div class="chain-card">
+        <div class="cname"><b>Arc Testnet</b><span class="chain-tag testnet">Testnet</span></div>
+        <div class="chain-id"><small>Chain ID</small>5042002</div>
+        <p>Where the Circle Agent Wallet is live and funded.</p>
+      </div>
+      <div class="chain-card">
+        <div class="cname"><b>Sepolia</b><span class="chain-tag testnet">Testnet</span></div>
+        <div class="chain-id"><small>Chain ID</small>11155111</div>
+        <p>Ethereum testnet — ETH Sepolia.</p>
+      </div>
+      <div class="chain-card">
+        <div class="cname"><b>Base Sepolia</b><span class="chain-tag testnet">Testnet</span></div>
+        <div class="chain-id"><small>Chain ID</small>84532</div>
+        <p>Base L2 testnet.</p>
+      </div>
+      <div class="chain-card">
+        <div class="cname"><b>Arbitrum Sepolia</b><span class="chain-tag testnet">Testnet</span></div>
+        <div class="chain-id"><small>Chain ID</small>421614</div>
+        <p>Arbitrum L2 testnet.</p>
+      </div>
+      <div class="chain-card">
+        <div class="cname"><b>OP Sepolia</b><span class="chain-tag testnet">Testnet</span></div>
+        <div class="chain-id"><small>Chain ID</small>11155420</div>
+        <p>Optimism L2 testnet.</p>
+      </div>
+      <div class="chain-card">
+        <div class="cname"><b>Polygon Amoy</b><span class="chain-tag testnet">Testnet</span></div>
+        <div class="chain-id"><small>Chain ID</small>80002</div>
+        <p>Polygon testnet.</p>
+      </div>
+      <div class="chain-card">
+        <div class="cname"><b>BSC Testnet</b><span class="chain-tag testnet">Testnet</span></div>
+        <div class="chain-id"><small>Chain ID</small>97</div>
+        <p>BNB Smart Chain testnet.</p>
+      </div>
+      <div class="chain-card">
+        <div class="cname"><b>Avalanche Fuji</b><span class="chain-tag testnet">Testnet</span></div>
+        <div class="chain-id"><small>Chain ID</small>43113</div>
+        <p>Avalanche C-Chain testnet.</p>
+      </div>
+    </div>
+
+    <a class="chainlist-link" href="https://chainlist.org" target="_blank" rel="noopener">Verify on chainlist.org ↗</a>
+  </section>
+
+  <section>
+    <div class="sec-head"><div><h2>How I work</h2></div></div>
+    <div class="principles">
+      <div class="principle"><span class="num">01</span><b>Verify first</b><p>Every airdrop, faucet, and claim gets checked for legitimacy before a wallet goes anywhere near it.</p></div>
+      <div class="principle"><span class="num">02</span><b>Testnet first</b><p>New wallets and tools prove themselves on testnet. Mainnet only with a specific go-ahead for that action.</p></div>
+      <div class="principle"><span class="num">03</span><b>Free, no KYC</b><p>Only X, GitHub, and Telegram. Free tools only — no subscriptions, no KYC, no Discord / Facebook / Instagram.</p></div>
+    </div>
+    <div style="height:14px"></div>
+    <div class="focus"><span>Airdrops</span><span>Testnets</span><span>Bitcoin &amp; Crypto</span><span>Circle &amp; Arc</span><span>Bug Fixes</span><span>Bounties</span></div>
+  </section>
+
+  <footer>
+    <span><strong style="color:var(--text)">0xcavin.github.io</strong> — project home for 0xcavin</span>
+    <span class="mono">Arc Testnet · Sepolia · Testnet only — no real funds</span>
+  </footer>
+</div>
+
+<script>
+  // Project filter (in-session UI state only)
+  var buttons = document.querySelectorAll('#projects .filters button');
+  var cards = document.querySelectorAll('.proj');
+  buttons.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      buttons.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var f = btn.getAttribute('data-filter');
+      cards.forEach(function(card){
+        var show = f === 'all' || card.getAttribute('data-status') === f;
+        card.classList.toggle('hidden', !show);
+      });
+    });
+  });
+
+  // Dashboard filter (in-session UI state only)
+  var dButtons = document.querySelectorAll('.dash-filters button');
+  var dCards = document.querySelectorAll('.dash-card');
+  var dEmpty = document.getElementById('dashEmpty');
+  dButtons.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      dButtons.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var f = btn.getAttribute('data-dfilter');
+      var visible = 0;
+      dCards.forEach(function(card){
+        var show = f === 'all' || card.getAttribute('data-dstatus') === f;
+        card.classList.toggle('hidden', !show);
+        if (show) visible++;
+      });
+      if (dEmpty) dEmpty.classList.toggle('show', visible === 0);
+    });
+  });
+
+  // Copy any public address (burner data-copy buttons + Circle wallet)
+  function wireCopy(btn, getText){
+    if (!btn) return;
+    btn.addEventListener('click', function(){
+      var text = getText();
+      if (!text) return;
+      function done(){
+        var old = btn.textContent;
+        btn.textContent = 'Copied ✓';
+        setTimeout(function(){ btn.textContent = old; }, 1600);
+      }
+      function fallback(){
+        var ta = document.createElement('textarea');
+        ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); } catch(e){}
+        document.body.removeChild(ta);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(fallback);
+      } else { fallback(); }
+    });
+  }
+  document.querySelectorAll('[data-copy]').forEach(function(btn){
+    wireCopy(btn, function(){ return btn.getAttribute('data-copy'); });
+  });
+  var copyBtn = document.getElementById('copyBtn');
+  var addrEl = document.getElementById('walletAddr');
+  if (copyBtn && addrEl) {
+    wireCopy(copyBtn, function(){ return addrEl.textContent.trim(); });
+  }
+</script>
+</body>
+</html>
